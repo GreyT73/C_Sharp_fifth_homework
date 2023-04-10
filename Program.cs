@@ -11,13 +11,13 @@ int[] GetArray(int length, int minNumber, int maxNumber)
     for(int i = 0; i < nums.Length; i++) nums[i] = rand.Next(minNumber, maxNumber);
     return nums;
 }
-// double[] GetArrayWithFloat(double length, double minNumber, double maxNumber)
-// {
-//     double[] nums = new double[length];
-//     Random rand = new Random();
-//     for(int i = 0; i < nums.Length; i++) nums[i] = rand.Next(minNumber, maxNumber);
-//     return nums;
-// }
+double[] GetArrayWithFloat(int length, int minNumber, int maxNumber)
+{
+    double[] nums = new double[length];
+    Random  rand = new  Random();
+    for (int i = 0; i < nums.Length; i++) nums[i] = rand.NextDouble() * (maxNumber - minNumber) + minNumber;
+    return nums;
+}
 int PrintInfo(string message)
 {
     System.Console.WriteLine(message);
@@ -25,6 +25,12 @@ int PrintInfo(string message)
     return digit;
 }
 void PrintArray(int[] nums)
+{
+    Console.Write("В массиве: [");
+    for (int i = 0; i < nums.Length - 1; i++) System.Console.Write($"{nums[i]}, ");
+    Console.Write($"{nums[nums.Length -1]}]");
+}
+void PrintFloatArray(double[] nums)
 {
     Console.Write("В массиве: [");
     for (int i = 0; i < nums.Length - 1; i++) System.Console.Write($"{nums[i]}, ");
@@ -63,19 +69,19 @@ System.Console.WriteLine("Задача 38: Задайте массив веще�
 len = PrintInfo("Введите длину массива: ");
 min = PrintInfo("Введите минимальное значение массива: ");
 max = PrintInfo("Введите максимальное значение массива: ");
-array = GetArray(len, min, max);
-PrintArray(array);
-int minimum = array[0];
-int maximum = array[0];
-for (int index = 1; index <array.Length; index++)
-{
-    if (array[index] < minimum)
+double[] floatArray = GetArrayWithFloat(len, min, max);
+PrintFloatArray(floatArray);
+double minimum = floatArray[0];
+double maximum = floatArray[0];
+for (int index = 1; index <floatArray.Length; index++)
+{   
+    if (floatArray[index] < minimum)
     {
-        minimum = array[index];
+        minimum = floatArray[index];
     }
-    if (array[index] > maximum)
+    if (floatArray[index] > maximum)
     {
-        maximum = array[index];
+        maximum = floatArray[index];
     }
 }
 System.Console.WriteLine($" разница между {maximum} и {minimum} составляет {maximum - minimum}");
